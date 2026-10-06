@@ -150,6 +150,23 @@ Responda sempre em Português do Brasil com tom sóbrio, elegante, profissional 
   }
 });
 
+// Endpoint to download the complete project as a ZIP archive
+app.get(['/andrade-cardoso-advocacia.zip', '/api/download-zip'], (_req: Request, res: Response) => {
+  const possiblePaths = [
+    path.resolve(__dirname, 'public', 'andrade-cardoso-advocacia.zip'),
+    path.resolve(__dirname, 'dist', 'andrade-cardoso-advocacia.zip'),
+    path.resolve(__dirname, 'andrade-cardoso-advocacia.zip'),
+  ];
+  for (const zipPath of possiblePaths) {
+    if (fs.existsSync(zipPath)) {
+      res.setHeader('Content-Type', 'application/zip');
+      res.setHeader('Content-Disposition', 'attachment; filename="andrade-cardoso-advocacia.zip"');
+      return res.sendFile(zipPath);
+    }
+  }
+  return res.status(404).send('Arquivo ZIP não encontrado no servidor.');
+});
+
 // ============================================================================
 // SERVER INITIALIZATION (DEV WITH VITE MIDDLEWARES / PROD STATIC SERVE WITH RESILIENCE)
 // ============================================================================

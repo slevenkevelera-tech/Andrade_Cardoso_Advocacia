@@ -1,5 +1,5 @@
 import React from 'react';
-import { Scale, Mail, Phone, MapPin, Instagram, Linkedin, MessageSquare, ArrowUpRight } from 'lucide-react';
+import { Scale, Mail, Phone, MapPin, Instagram, Linkedin, MessageSquare, ArrowUpRight, Download } from 'lucide-react';
 
 interface FooterProps {
   onOpenConsultation: () => void;
@@ -150,14 +150,24 @@ export const Footer: React.FC<FooterProps> = ({ onOpenConsultation, onOpenAdmin 
             </span>
           </div>
 
-          <div className="flex items-center gap-4 text-xs">
+          <div className="flex flex-wrap items-center gap-3 text-xs">
+            <a
+              href="/andrade-cardoso-advocacia.zip"
+              download="andrade-cardoso-advocacia.zip"
+              className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-[#2B374E] bg-[#0E1524] text-slate-300 hover:text-[#C5A880] hover:border-[#C5A880]/50 transition-colors shadow-sm"
+              title="Baixar projeto completo em formato .ZIP"
+            >
+              <Download className="w-3.5 h-3.5 text-[#C5A880]" />
+              <span className="font-medium">Baixar Projeto (.zip)</span>
+            </a>
+            <span className="text-slate-600">·</span>
             <button
               onClick={onOpenAdmin}
               className="text-slate-400 hover:text-[#C5A880] transition-colors cursor-pointer"
             >
               Acesso Restrito CRM
             </button>
-            <span>·</span>
+            <span className="text-slate-600">·</span>
             <a href="#academy" className="hover:text-white transition-colors">
               Clube de Assinaturas (R$ 19,90)
             </a>

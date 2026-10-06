@@ -5,6 +5,7 @@ node_modules/
 dist/
 build/
 coverage/
+/andrade-cardoso-advocacia.zip
 
 # OS and Editor metadata
 .DS_Store
