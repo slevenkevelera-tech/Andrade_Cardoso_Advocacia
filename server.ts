@@ -186,15 +186,15 @@ async function startServer() {
     } else {
       console.warn('[Vite Middleware Fallback]: dist/index.html ainda ausente. Ativando Vite runtime dinâmico como contingência...');
       const vite = await createViteServer({
-        server: { middlewareMode: true, host: '0.0.0.0' },
+        server: { middlewareMode: true, host: '0.0.0.0', hmr: false },
         appType: 'spa',
       });
       app.use(vite.middlewares);
     }
   } else {
-    // Development mode with Vite HMR/middlewares
+    // Development mode with Vite middlewares (hmr disabled to prevent websocket connection errors)
     const vite = await createViteServer({
-      server: { middlewareMode: true, host: '0.0.0.0' },
+      server: { middlewareMode: true, host: '0.0.0.0', hmr: false },
       appType: 'spa',
     });
     app.use(vite.middlewares);
