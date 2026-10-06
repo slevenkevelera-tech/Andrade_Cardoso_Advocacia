@@ -1,4 +1,5 @@
 import express, { Request, Response, NextFunction } from 'express';
+import http from 'http';
 import { createServer as createViteServer } from 'vite';
 import dotenv from 'dotenv';
 import path from 'path';
@@ -155,6 +156,7 @@ Responda sempre em Português do Brasil com tom sóbrio, elegante, profissional 
 async function startServer() {
   const distPath = path.resolve(__dirname, 'dist');
   const indexPath = path.resolve(distPath, 'index.html');
+  const httpServer = http.createServer(app);
 
   if (isProduction) {
     // If running in production but dist/index.html is missing (e.g. Render build step only ran 'npm install'),
@@ -186,21 +188,21 @@ async function startServer() {
     } else {
       console.warn('[Vite Middleware Fallback]: dist/index.html ainda ausente. Ativando Vite runtime dinâmico como contingência...');
       const vite = await createViteServer({
-        server: { middlewareMode: true, host: '0.0.0.0', hmr: false },
+        server: { middlewareMode: true, hmr: { server: httpServer } },
         appType: 'spa',
       });
       app.use(vite.middlewares);
     }
   } else {
-    // Development mode with Vite middlewares (hmr disabled to prevent websocket connection errors)
+    // Development mode with Vite middlewares attached to the HTTP server for valid WebSocket upgrades
     const vite = await createViteServer({
-      server: { middlewareMode: true, host: '0.0.0.0', hmr: false },
+      server: { middlewareMode: true, hmr: { server: httpServer } },
       appType: 'spa',
     });
     app.use(vite.middlewares);
   }
 
-  app.listen(PORT, '0.0.0.0', () => {
+  httpServer.listen(PORT, '0.0.0.0', () => {
     console.log(`[Andrade & Cardoso] Servidor seguro ativo na porta ${PORT} (${isProduction ? 'Produção' : 'Desenvolvimento'})`);
   });
 }
