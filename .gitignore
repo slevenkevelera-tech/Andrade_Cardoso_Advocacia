@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Production build outputs
+dist/
+build/
+coverage/
+
+# OS and Editor metadata
+.DS_Store
+Thumbs.db
+*.log
+*.tmp
+*.patch
+
+# Security: Never commit environment files or sensitive keys
+.env*
+!.env.example
+
+# Security: Never commit private certificates, keys, or service account credentials
+*.pem
+*.key
+*.cert
+*.p12
+service-account*.json
+firebase-adminsdk*.json
+credentials.json

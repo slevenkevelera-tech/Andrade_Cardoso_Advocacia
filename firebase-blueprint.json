@@ -1,0 +1,99 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "Represents an authenticated user profile in the law firm portal",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of the user matching Firebase Auth UID",
+          "maxLength": 128
+        },
+        "name": {
+          "type": "string",
+          "description": "Full name of the user",
+          "maxLength": 150
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "description": "Email address of the user",
+          "maxLength": 150
+        },
+        "role": {
+          "type": "string",
+          "description": "Role of the user in the portal",
+          "enum": ["client", "lawyer", "admin"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "ISO timestamp when the user profile was created"
+        }
+      },
+      "required": ["id", "name", "email", "role", "createdAt"]
+    },
+    "Consultation": {
+      "title": "Consultation",
+      "description": "Represents a legal consultation inquiry submitted by a prospective client",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique consultation document identifier",
+          "maxLength": 128
+        },
+        "clientName": {
+          "type": "string",
+          "description": "Full name of the client requesting consultation",
+          "maxLength": 150
+        },
+        "clientEmail": {
+          "type": "string",
+          "format": "email",
+          "description": "Email of the client",
+          "maxLength": 150
+        },
+        "clientPhone": {
+          "type": "string",
+          "description": "Phone number or WhatsApp contact",
+          "maxLength": 30
+        },
+        "legalArea": {
+          "type": "string",
+          "description": "Legal practice area requested (e.g., Tributário, Trabalhista, Civil)",
+          "maxLength": 100
+        },
+        "message": {
+          "type": "string",
+          "description": "Description of the legal demand or question",
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "description": "Current status of the consultation inquiry",
+          "enum": ["pending", "in_review", "scheduled", "completed", "cancelled"]
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Server timestamp of creation"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Server timestamp of last update"
+        }
+      },
+      "required": ["clientName", "clientEmail", "legalArea", "message", "status", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "Collection of user profile documents indexed by user UID"
+    },
+    "/consultations/{consultationId}": {
+      "schema": "Consultation",
+      "description": "Collection of consultation requests submitted by clients or leads"
+    }
+  }
+}

@@ -1,0 +1,6 @@
+{
+  "name": "Andrade Cardoso Advogados",
+  "description": "Escritório de advocacia de alta complexidade e soluções jurídicas inteligentes liderado por Maurilo Cardoso e Lorenzo Cardoso.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
