@@ -1,7 +1,11 @@
-// Partner portraits are served as versioned local assets from the Render build.
-// The filenames are intentionally unique so no browser/CDN can reuse an older image URL.
+import mauriloPhoto from '../assets/images/partner-maurilo-uploaded-v1.jpg';
+import lorenzoPhoto from '../assets/images/partner-lorenzo-uploaded-v1.jpg';
+import luanaPhoto from '../assets/images/partner-luana-uploaded-v1.jpg';
+
+// Imported through Vite so production URLs are content-hashed and cannot reuse
+// the previous public/static image URLs.
 export const PARTNER_PHOTOS = {
-  maurilo: '/images/partners/maurilo-cardoso-v4.jpg',
-  lorenzo: '/images/partners/lorenzo-cardoso-v4.jpg',
-  luana: '/images/partners/luana-monteiro-v4.jpg',
+  maurilo: mauriloPhoto,
+  lorenzo: lorenzoPhoto,
+  luana: luanaPhoto,
 } as const;
