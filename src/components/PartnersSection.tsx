@@ -2,6 +2,81 @@ import React from 'react';
 import { PARTNERS_DATA } from '../data/mockData';
 import { ShieldCheck, Cpu, Mail, Linkedin, MessageSquare, Award, CheckCircle2 } from 'lucide-react';
 
+interface HighResolutionPortraitProps {
+  src: string;
+  alt: string;
+  enabled: boolean;
+}
+
+const HighResolutionPortrait: React.FC<HighResolutionPortraitProps> = ({ src, alt, enabled }) => {
+  const canvasRef = React.useRef<HTMLCanvasElement>(null);
+
+  React.useEffect(() => {
+    if (!enabled) return;
+
+    const image = new Image();
+    image.decoding = 'async';
+    image.onload = () => {
+      const canvas = canvasRef.current;
+      if (!canvas) return;
+
+      // 4K-class portrait render: keep the original framing, upscale with
+      // browser high-quality resampling, and apply a very subtle contrast
+      // pass so the result stays natural rather than looking over-sharpened.
+      const targetWidth = 2880;
+      const targetHeight = 3840;
+      canvas.width = targetWidth;
+      canvas.height = targetHeight;
+
+      const ctx = canvas.getContext('2d', { alpha: false });
+      if (!ctx) return;
+      ctx.imageSmoothingEnabled = true;
+      ctx.imageSmoothingQuality = 'high';
+
+      const sourceRatio = image.naturalWidth / image.naturalHeight;
+      const targetRatio = targetWidth / targetHeight;
+      let sx = 0;
+      let sy = 0;
+      let sw = image.naturalWidth;
+      let sh = image.naturalHeight;
+
+      if (sourceRatio > targetRatio) {
+        sw = image.naturalHeight * targetRatio;
+        sx = (image.naturalWidth - sw) / 2;
+      } else {
+        sh = image.naturalWidth / targetRatio;
+        sy = (image.naturalHeight - sh) / 2;
+      }
+
+      ctx.filter = 'contrast(1.035) saturate(1.01)';
+      ctx.drawImage(image, sx, sy, sw, sh, 0, 0, targetWidth, targetHeight);
+      ctx.filter = 'none';
+    };
+
+    image.src = src;
+  }, [src, enabled]);
+
+  if (!enabled) {
+    return (
+      <img
+        src={src}
+        alt={alt}
+        referrerPolicy="no-referrer"
+        className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+      />
+    );
+  }
+
+  return (
+    <canvas
+      ref={canvasRef}
+      role="img"
+      aria-label={alt}
+      className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+    />
+  );
+};
+
 interface PartnersSectionProps {
   onSelectPartnerForMeeting: (partnerName: string) => void;
   onOpenGmailWithRecipient?: (email: string, subject: string) => void;
@@ -47,11 +122,10 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({
                     {/* Partner Official Portrait */}
                     <div className="flex flex-col items-center shrink-0 w-28 sm:w-32">
                       <div className="relative w-28 h-36 sm:w-32 sm:h-40 rounded-lg overflow-hidden border border-[#2B374E] shadow-md">
-                        <img
+                        <HighResolutionPortrait
                           src={partner.image}
                           alt={partner.name}
-                          referrerPolicy="no-referrer"
-                          className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                          enabled={isMaurilo || partner.id === 'luana-monteiro'}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F17]/80 via-transparent to-transparent pointer-events-none" />
                       </div>
