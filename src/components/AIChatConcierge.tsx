@@ -25,7 +25,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
     {
       id: 'msg-1',
       sender: 'ai',
-      text: 'Bem-vindo ao escritório Andrade Cardoso Advogados. Sou o Concierge Autônomo de Inteligência Jurídica. Como posso orientar sua demanda hoje?',
+      text: 'Bem-vindo ao escritório Andrade Cardoso Advogados. Sou o Concierge Virtual de triagem. Como posso orientar sua demanda hoje?',
       timestamp: 'Agora',
       options: [
         'Agendar Reunião com Dr. Maurilo Cardoso',
@@ -59,10 +59,15 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
     try {
       // Secure call to server-side proxy route (/api/chat)
       // GEMINI_API_KEY is kept strictly on the backend, shielded from attackers
+      const history = nextMessages.slice(-12).map((item) => ({
+        role: item.sender === 'ai' ? 'model' : 'user',
+        text: item.text,
+      }));
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: userMsg.text, history: history.slice(0, -1) }),
       });
 
       if (response.ok) {
@@ -121,7 +126,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
           </div>
           <div className="hidden sm:block text-left">
             <div className="text-xs font-semibold text-[#F3E5D0]">Concierge Autônomo</div>
-            <div className="text-[10px] text-slate-400">Atendimento 24/7 · Triagem IA</div>
+            <div className="text-[10px] text-slate-400">Atendimento · Triagem IA</div>
           </div>
         </button>
       )}
