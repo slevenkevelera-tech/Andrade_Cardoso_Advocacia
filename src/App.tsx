@@ -25,8 +25,8 @@ import { GmailHubModal } from './components/GmailHubModal';
 export default function App() {
   // Current user state (defaults to an authenticated member with email from user metadata)
   const [user, setUser] = useState<UserProfile>({
-    name: 'Dr. Sleven Kevelera',
-    email: 'slevenkevelera@gmail.com',
+    name: '',
+    email: '',
     role: 'guest',
     hasActiveSubscription: false,
   });
@@ -72,7 +72,7 @@ export default function App() {
 
   const handleLeadCaptured = (newLead: Lead) => {
     triggerNotice(
-      `Consulta agendada com sucesso! O lead foi inserido no pipeline CRM e o webhook do WhatsApp notificou o Dr. Maurilo e Lorenzo.`
+      `Sua solicitação foi registrada. O escritório poderá entrar em contato pelos canais informados.`
     );
   };
 
