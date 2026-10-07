@@ -41,15 +41,12 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       phone,
       stage: 'Consulta Agendada',
       legalArea,
-      estimatedValue: 45000,
+      estimatedValue: 0,
       priority: 'Alta',
       source: 'Site',
       lastContact: 'Agora mesmo',
       notes: `Reunião agendada com ${partner} para ${preferredDate} às ${preferredTime}. Resumo: ${description}`,
     };
-
-    onLeadCaptured(newLead);
-    setIsSubmitted(true);
 
     // Persist to Firestore consultations collection
     try {
@@ -64,7 +61,11 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
       });
     } catch (err) {
       console.warn('[Firestore] Falha ao registrar a consulta:', err);
+      return;
     }
+
+    onLeadCaptured(newLead);
+    setIsSubmitted(true);
 
     setTimeout(() => {
       setIsSubmitted(false);
@@ -91,7 +92,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
               Solicitação Confirmada!
             </h3>
             <p className="text-xs text-slate-300 max-w-sm mx-auto leading-relaxed">
-              O gabinete de <strong>{partner}</strong> recebeu suas informações. Nosso sistema autônomo enviou os detalhes da pré-reunião para seu e-mail e WhatsApp.
+              Sua solicitação foi registrada. O escritório poderá entrar em contato pelos canais informados.
             </p>
             <div className="pt-2">
               <a
@@ -211,6 +212,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
                   </label>
                   <input
                     type="date"
+                    min={new Date().toISOString().split('T')[0]}
                     value={preferredDate}
                     onChange={(e) => setPreferredDate(e.target.value)}
                     className="w-full px-3 py-2 rounded-lg bg-[#080B11] border border-[#232D42] text-xs text-white focus:border-[#C5A880] focus:outline-none font-mono-luxury"
