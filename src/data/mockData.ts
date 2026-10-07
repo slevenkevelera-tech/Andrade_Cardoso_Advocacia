@@ -1,3 +1,4 @@
+import { PARTNER_PHOTOS } from './partnerPhotos';
 import { Partner, Testimonial, Jurisprudence, InstagramPost, AcademyMaterial, Lead, AutomationRule, WebhookConfig, BlogPost, EditorialCalendarItem } from '../types';
 
 export const PARTNERS_DATA: Partner[] = [
@@ -20,7 +21,7 @@ export const PARTNERS_DATA: Partner[] = [
       'Direito Imobiliário & Contratos Complexos',
     ],
     quote: 'A técnica processual impecável aliada à intransigente defesa das prerrogativas é a única garantia de vitória nas causas de grande impacto.',
-    image: '/images/partners/maurilo-cardoso.jpg?v=20261007',
+    image: PARTNER_PHOTOS.maurilo,
     email: 'maurilo@andradecardoso.adv.br',
     linkedin: 'https://linkedin.com/in/maurilo-cardoso',
     whatsapp: 'https://w.app/lorenzo_cardoso_software_engineer',
@@ -44,7 +45,7 @@ export const PARTNERS_DATA: Partner[] = [
       'Compliance Digital, Proteção de Dados (LGPD) & Cyber Law',
     ],
     quote: 'O futuro da advocacia pertence a quem une a erudição da tese jurídica à precisão matemática dos algoritmos e da automação contínua.',
-    image: '/images/partners/lorenzo-cardoso.jpg?v=20261007',
+    image: PARTNER_PHOTOS.lorenzo,
     email: 'lorenzo@andradecardoso.adv.br',
     linkedin: 'https://linkedin.com/in/lorenzo-cardoso',
     whatsapp: 'https://w.app/lorenzo_cardoso_software_engineer',
@@ -68,7 +69,7 @@ export const PARTNERS_DATA: Partner[] = [
       'Direito Civil Estratégico & Resolução de Disputas',
     ],
     quote: 'A solidez de uma grande corporação se constrói na segurança jurídica de cada cláusula e na clareza estratégica das decisões.',
-    image: '/images/partners/luana-monteiro.jpg?v=20261007',
+    image: PARTNER_PHOTOS.luana,
     email: 'luana@andradecardoso.adv.br',
     linkedin: 'https://linkedin.com/in/luana-andrade-adv',
     whatsapp: 'https://w.app/lorenzo_cardoso_software_engineer',
@@ -208,7 +209,7 @@ export const JURISPRUDENCE_DATA: Jurisprudence[] = [
 export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
   {
     id: 'ig-1',
-    imageUrl: '/images/partners/lorenzo-cardoso.jpg?v=20261007',
+    imageUrl: PARTNER_PHOTOS.lorenzo,
     caption: '⚙️ Lorenzo Cardoso · Tecnologia, automação e inovação aplicada à advocacia.',
     likes: 1420,
     comments: 87,
@@ -218,7 +219,7 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
   },
   {
     id: 'ig-2',
-    imageUrl: '/images/partners/maurilo-cardoso.jpg?v=20261007',
+    imageUrl: PARTNER_PHOTOS.maurilo,
     caption: '⚖️ Maurilo Cardoso · Atuação estratégica, tribunais e defesa das prerrogativas da advocacia.',
     likes: 2190,
     comments: 134,
@@ -228,7 +229,7 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
   },
   {
     id: 'ig-3',
-    imageUrl: '/images/partners/luana-monteiro.jpg?v=20261007',
+    imageUrl: PARTNER_PHOTOS.luana,
     caption: '👩‍⚖️ Luana Monteiro · Direito Civil, Empresarial e estruturação jurídica estratégica.',
     likes: 3105,
     comments: 242,
