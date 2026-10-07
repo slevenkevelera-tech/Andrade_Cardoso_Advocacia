@@ -23,7 +23,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [legalArea, setLegalArea] = useState('Tributário & Fiscal Estratégico');
-  const [preferredDate, setPreferredDate] = useState('2026-10-08');
+  const [preferredDate, setPreferredDate] = useState('');
   const [preferredTime, setPreferredTime] = useState('14:30');
   const [description, setDescription] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -63,7 +63,7 @@ export const ConsultationModal: React.FC<ConsultationModalProps> = ({
         createdAt: new Date().toISOString(),
       });
     } catch (err) {
-      console.warn('[Firestore] Notice: consultation saved locally:', err);
+      console.warn('[Firestore] Falha ao registrar a consulta:', err);
     }
 
     setTimeout(() => {

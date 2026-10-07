@@ -102,14 +102,16 @@ app.get('/api/config', (_req: Request, res: Response) => {
 // GEMINI_API_KEY is kept strictly on the server and is NEVER sent to the client.
 app.post('/api/chat', rateLimiter(20, 60 * 1000), async (req: Request, res: Response) => {
   try {
-    const { message } = req.body;
+    const message = typeof req.body?.message === 'string' ? req.body.message.trim().slice(0, 1200) : '';
+    const history = Array.isArray(req.body?.history) ? req.body.history
+      .filter((item: any) => item && typeof item.text === 'string')
+      .map((item: any) => ({ role: item.role === 'model' ? 'model' : 'user', text: item.text.trim().slice(0, 1200) }))
+      .filter((item: any) => item.text)
+      .slice(-12) : [];
 
-    if (!message || typeof message !== 'string' || !message.trim()) {
-      return res.status(400).json({ error: 'Mensagem inválida ou ausente.' });
-    }
+    if (!message) return res.status(400).json({ error: 'Mensagem inválida ou ausente.' });
 
-    // Input sanitization: truncate to 1200 characters to prevent prompt injection and token depletion
-    const sanitizedInput = message.trim().slice(0, 1200);
+    const contents = [...history.map((item: any) => ({ role: item.role, parts: [{ text: item.text }] })), { role: 'user', parts: [{ text: message }] }];
 
     const apiKey = process.env.GEMINI_API_KEY;
     if (!apiKey) {
@@ -120,22 +122,18 @@ app.post('/api/chat', rateLimiter(20, 60 * 1000), async (req: Request, res: Resp
 
     const ai = new GoogleGenAI({
       apiKey,
-      httpOptions: {
-        headers: {
-          'User-Agent': 'aistudio-build',
-        },
-      },
+      httpOptions: { headers: { 'User-Agent': 'andrade-cardoso-website' } },
     });
     const response = await ai.models.generateContent({
       model: 'gemini-3.8-flash',
-      contents: sanitizedInput,
+      contents,
       config: {
-        systemInstruction: `Você é o Concierge Virtual e Assistente Jurídico Oficial do escritório Andrade & Cardoso Advogados Associados.
+        systemInstruction: `Você é o Concierge Virtual do escritório Andrade & Cardoso Advogados Associados.
 Sócios Fundadores:
 - Dr. Maurilo Cardoso: Especialista em Direito Tributário Estratégico, Direito Público e Prerrogativas da Advocacia (Delegado OAB/PA Cametá). Atua em causas de alta complexidade nos Tribunais Superiores (TRF1, STJ e STF).
 - Lorenzo Cardoso: Especialista em Engenharia de Software, Jurimetria e Automação Jurídica, liderando produtos do Andrade Cardoso Club e inovações processuais.
 Seu objetivo é acolher clientes, esclarecer dúvidas com polidez e orientar o agendamento de consultas ou triagem preliminar.
-Nunca forneça consultoria jurídica vinculante definitiva; sempre oriente que o caso concreto será analisado formalmente pelos advogados sócios.
+Não substitua consulta jurídica formal. Não invente fatos, prazos, honorários ou resultados. Nunca diga que um lead foi salvo, alguém foi notificado ou uma consulta foi agendada, a menos que a aplicação confirme explicitamente.
 Responda sempre em Português do Brasil com tom sóbrio, elegante, profissional e empático. Seja conciso (máximo 3 parágrafos curtos).`,
       },
     });

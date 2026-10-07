@@ -25,7 +25,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
     {
       id: 'msg-1',
       sender: 'ai',
-      text: 'Bem-vindo ao escritório Andrade Cardoso Advogados. Sou o Concierge Autônomo de Inteligência Jurídica. Como posso orientar sua demanda hoje?',
+      text: 'Bem-vindo ao escritório Andrade Cardoso Advogados. Sou o Concierge Virtual de triagem. Como posso orientar sua demanda hoje?',
       timestamp: 'Agora',
       options: [
         'Agendar Reunião com Dr. Maurilo Cardoso',
@@ -49,6 +49,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
       timestamp: 'Agora',
     };
 
+    const previousMessages = messages;
     setMessages((prev) => [...prev, userMsg]);
     setInputMessage('');
     setIsTyping(true);
@@ -57,12 +58,15 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
     let nextOptions: string[] | undefined;
 
     try {
-      // Secure call to server-side proxy route (/api/chat)
-      // GEMINI_API_KEY is kept strictly on the backend, shielded from attackers
+      const history = previousMessages.slice(-12).map((item: ChatMessage) => ({
+        role: item.sender === 'ai' ? 'model' : 'user',
+        text: item.text,
+      }));
+
       const response = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ message: text }),
+        body: JSON.stringify({ message: userMsg.text, history }),
       });
 
       if (response.ok) {
@@ -75,7 +79,6 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
       // Silent catch; fallback logic below handles offline/fallback
     }
 
-    // High-precision legal fallback if backend AI is unavailable or offline
     if (!reply) {
       const lower = text.toLowerCase();
       if (lower.includes('maurilo') || lower.includes('reunião') || lower.includes('consulta')) {
@@ -90,7 +93,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
       } else if (lower.includes('urgente') || lower.includes('processo') || lower.includes('triagem')) {
         reply = 'Entendido. Em casos com prazos processuais em curso ou bloqueios judiciais, nossa equipe realiza triagem prioritária. Por favor, informe seu nome e telefone WhatsApp.';
       } else {
-        reply = 'Agradeço as informações. Registrei sua solicitação no sistema de triagem do escritório Andrade & Cardoso. Nossos advogados sócios retornarão o seu contato.';
+        reply = 'Agradeço as informações. Posso orientar sua demanda e, se necessário, encaminhá-la para contato com o escritório pelos canais disponíveis.';
         nextOptions = ['Falar com Concierge no WhatsApp', 'Consultar Jurisprudência'];
       }
     }
@@ -109,7 +112,6 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
 
   return (
     <div className="fixed bottom-4 right-4 sm:bottom-6 sm:right-6 z-40">
-      {/* Floating Trigger Button */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
@@ -120,16 +122,14 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
             <span className="absolute -top-1 -right-1 w-2.5 h-2.5 rounded-full bg-emerald-500 ring-2 ring-[#080B11]" />
           </div>
           <div className="hidden sm:block text-left">
-            <div className="text-xs font-semibold text-[#F3E5D0]">Concierge Autônomo</div>
-            <div className="text-[10px] text-slate-400">Atendimento 24/7 · Triagem IA</div>
+            <div className="text-xs font-semibold text-[#F3E5D0]">Concierge Virtual</div>
+            <div className="text-[10px] text-slate-400">Atendimento · Triagem IA</div>
           </div>
         </button>
       )}
 
-      {/* Chat Dialog Window */}
       {isOpen && (
         <div className="relative w-[calc(100vw-32px)] sm:w-[380px] md:w-[400px] max-w-[400px] h-[480px] sm:h-[520px] max-h-[82vh] rounded-2xl border border-[#2B374E] bg-[#0A0F1A] shadow-2xl flex flex-col overflow-hidden animate-in slide-in-from-bottom-5 duration-200">
-          {/* Header */}
           <div className="p-4 border-b border-[#1E2638] bg-[#0E1626] flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="p-2 rounded-lg bg-[#C5A880]/15 text-[#C5A880] border border-[#C5A880]/30">
@@ -149,12 +149,12 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
             <button
               onClick={() => setIsOpen(false)}
               className="p-1 rounded text-slate-400 hover:text-white transition-colors cursor-pointer"
+              aria-label="Fechar concierge"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Messages Flow */}
           <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-[#080B11]/60">
             {messages.map((m) => (
               <div
@@ -180,7 +180,7 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
                           if (opt === 'Sim, preencher formulário' && onOpenConsultation) {
                             onOpenConsultation();
                           } else if (opt === 'Falar direto no WhatsApp' || opt === 'Falar com Concierge no WhatsApp') {
-                            window.open('https://w.app/lorenzo_cardoso_software_engineer', '_blank');
+                            window.open('https://w.app/lorenzo_cardoso_software_engineer', '_blank', 'noopener,noreferrer');
                           } else {
                             handleSendMessage(opt);
                           }
@@ -203,7 +203,6 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
             )}
           </div>
 
-          {/* Quick Hand-off Footer */}
           <div className="px-4 py-2 bg-[#0C121E] border-t border-[#1E2638] flex items-center justify-between text-[11px] text-slate-400">
             <span className="flex items-center gap-1">
               <Sparkles className="w-3 h-3 text-[#D4AF37]" />
@@ -219,7 +218,6 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
             </a>
           </div>
 
-          {/* Input Box */}
           <div className="p-3 bg-[#0A0F1A] border-t border-[#1E2638] flex items-center gap-2">
             <input
               type="text"
@@ -227,11 +225,14 @@ export const AIChatConcierge: React.FC<AIChatConciergeProps> = ({
               onChange={(e) => setInputMessage(e.target.value)}
               onKeyDown={(e) => e.key === 'Enter' && handleSendMessage()}
               placeholder="Digite sua dúvida ou demanda..."
+              aria-label="Mensagem para o concierge"
+              maxLength={1000}
               className="flex-1 px-3 py-2 rounded-lg bg-[#080B11] border border-[#232D42] text-xs text-white placeholder-slate-500 focus:outline-none focus:border-[#C5A880]"
             />
             <button
               onClick={() => handleSendMessage()}
               className="p-2 rounded-lg bg-[#C5A880] text-[#0B0F17] hover:bg-[#D4AF37] transition-colors cursor-pointer"
+              aria-label="Enviar mensagem"
             >
               <Send className="w-4 h-4" />
             </button>
