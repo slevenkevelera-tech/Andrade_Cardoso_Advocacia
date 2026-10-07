@@ -70,7 +70,7 @@ service cloud.firestore {
     match /consultations/{consultationId} {
       allow get: if isAdmin() || (isSignedIn() && resource.data.clientEmail == request.auth.token.email);
       allow list: if isAdmin() || (isSignedIn() && resource.data.clientEmail == request.auth.token.email);
-      allow create: if isValidConsultation(incoming()) && incoming().status == 'pending';
+      allow create: if isValidConsultation(incoming()) && incoming().status == 'pending' && incoming().clientName.size() <= 150 && incoming().clientEmail.size() <= 150 && incoming().clientPhone.size() <= 30 && incoming().legalArea.size() <= 100 && incoming().message.size() <= 2000;
       allow update: if isAdmin();
       allow delete: if isAdmin();
     }
