@@ -237,16 +237,6 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
     tag: '#LuanaMonteiro',
     postUrl: 'https://instagram.com/andradecardosoadv',
   },
-  {
-    id: 'ig-4',
-    imageUrl: '/src/assets/images/lorenzo_cardoso_exact_portrait_1791049320848.jpg',
-    caption: '📚 Lançamento exclusivo: Nova edição do Compêndio Prático de Peças Tributárias para advogados no Andrade Cardoso Club. Acesse o material pelo link na bio.',
-    likes: 1240,
-    comments: 89,
-    timestamp: 'Há 4 dias',
-    tag: '#PraticaJuridica',
-    postUrl: 'https://instagram.com/andradecardosoadv',
-  },
 ];
 
 export const ACADEMY_MATERIALS_DATA: AcademyMaterial[] = [
