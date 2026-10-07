@@ -125,7 +125,7 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({
                         <HighResolutionPortrait
                           src={partner.image}
                           alt={partner.name}
-                          enabled={isMaurilo || partner.id === 'luana-monteiro'}
+                          enabled={isMaurilo || partner.id === 'luana-andrade'}
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-[#0B0F17]/80 via-transparent to-transparent pointer-events-none" />
                       </div>
