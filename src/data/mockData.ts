@@ -15,8 +15,10 @@ export const PARTNERS_DATA: Partner[] = [
       'Mais de 1.000 sustentações orais e recursos estratégicos nos Tribunais',
     ],
     specialties: [
-      'Contencioso Estratégico & Tribunais Superiores',
-      'Direito Tributário Empresarial & Recuperação de Créditos',
+      'Contencioso Estratégico & Tribunais',
+      'Direito Penal',
+      'Direito Civil',
+      'Direito Previdenciário',
       'Defesa Regulatória e Patrimonial',
       'Direito Imobiliário & Contratos Complexos',
     ],
