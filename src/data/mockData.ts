@@ -7,7 +7,7 @@ export const PARTNERS_DATA: Partner[] = [
     name: 'Maurilo Cardoso',
     role: 'Sócio-Fundador · Delegado OAB/Cametá',
     badge: 'Delegado OAB/Cametá · OAB/PA',
-    bio: 'Advogado sênior com mais de 25 anos de atuação combativa em litígios de alta complexidade, estratégia contenciosa perante Tribunais Superiores e governança institucional. Como Delegado da OAB na Subseção de Cametá, lidera prerrogativas da advocacia e defesa do Estado Democrático de Direito na região norte.',
+    bio: 'Advogado sênior com mais de 10 anos de atuação combativa em litígios de alta complexidade, estratégia contenciosa perante Tribunais e governança institucional. Como Delegado da OAB na Subseção de Cametá, lidera prerrogativas da advocacia e defesa do Estado Democrático de Direito na região norte.',
     credentials: [
       'Delegado OAB/Cametá (Subseção OAB/PA)',
       'Especialista em Direito Processual Civil & Constitucional',
