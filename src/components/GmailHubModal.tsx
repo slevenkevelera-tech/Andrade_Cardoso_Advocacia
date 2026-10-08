@@ -146,8 +146,12 @@ export const GmailHubModal: React.FC<GmailHubModalProps> = ({
       }
     } catch (err: any) {
       console.error('Falha no login Google:', err);
+      const code = err?.code || '';
+      const rawMessage = err?.message || 'Falha na autenticação com o Google Workspace. Tente novamente.';
       setErrorMessage(
-        err.message || 'Falha na autenticação com o Google Workspace. Tente novamente.'
+        code === 'auth/unauthorized-domain'
+          ? 'O domínio deste portal ainda não está autorizado no Firebase Authentication. Autorize o domínio de produção do portal em Firebase > Authentication > Settings > Authorized domains e tente novamente.'
+          : rawMessage
       );
     } finally {
       setIsLoggingIn(false);
