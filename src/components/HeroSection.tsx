@@ -18,11 +18,8 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
           src="/images/hero-advocacia-luxury.jpg"
           alt=""
           aria-hidden="true"
-          className="h-full w-full object-cover object-center opacity-35 scale-105 transition-transform duration-1000 ease-out"
+          className="h-full w-full object-cover object-center opacity-100 transition-transform duration-1000 ease-out"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-[#080B11]/95 via-[#080B11]/72 to-[#080B11]/48" />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#080B11] via-[#080B11]/62 to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_70%_55%_at_72%_42%,rgba(197,168,128,0.12),transparent)]" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 sm:py-32 text-center lg:px-8">
