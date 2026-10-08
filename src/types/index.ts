@@ -11,6 +11,7 @@ export interface Partner {
   email: string;
   linkedin: string;
   whatsapp: string;
+  instagram?: string;
 }
 
 export interface Testimonial {
