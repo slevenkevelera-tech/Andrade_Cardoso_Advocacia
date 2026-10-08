@@ -41,9 +41,10 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
 
         {/* Descriptive Body Prose */}
         <p className="mt-8 text-base sm:text-lg md:text-xl font-sans-luxury text-[#94A3B8] max-w-3xl mx-auto leading-relaxed font-light">
-          A convergência singular entre o rigor processual e a liderança institucional do{' '}
-          <strong className="text-[#F1E5D5] font-semibold">Dr. Maurilo Cardoso</strong> (Delegado OAB/Cametá) e os algoritmos proprietários de jurimetria preditiva de{' '}
-          <strong className="text-[#F1E5D5] font-semibold">Lorenzo Cardoso</strong> (Engenheiro de Software & Automação).
+          A Andrade Cardoso nasce da convergência entre a força da advocacia estratégica, a inteligência de dados e a experiência humana que transforma complexidade jurídica em decisões mais seguras.{' '}
+          <strong className="text-[#F1E5D5] font-semibold">Dr. Maurilo Cardoso</strong> (Delegado OAB/Cametá) imprime liderança institucional e rigor processual;{' '}
+          <strong className="text-[#F1E5D5] font-semibold">Lorenzo Cardoso</strong> (Engenheiro de Software & Automação) desenvolve a camada tecnológica de jurimetria, automação e inteligência jurídica; e{' '}
+          <strong className="text-[#F1E5D5] font-semibold">Luana Monteiro</strong>, sócia especializada em Direito do Trabalho há mais de 16 anos, agrega experiência estratégica na proteção de relações profissionais, prevenção de passivos e condução de demandas trabalhistas.
         </p>
 
         {/* Action Controls */}
