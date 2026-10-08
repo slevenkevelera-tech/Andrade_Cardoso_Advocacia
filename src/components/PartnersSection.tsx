@@ -1,6 +1,6 @@
 import React from 'react';
 import { PARTNERS_DATA } from '../data/mockData';
-import { ShieldCheck, Cpu, Mail, Linkedin, MessageSquare, Award, CheckCircle2 } from 'lucide-react';
+import { ShieldCheck, Cpu, Mail, Linkedin, Instagram, MessageSquare, Award, CheckCircle2 } from 'lucide-react';
 
 interface HighResolutionPortraitProps {
   src: string;
@@ -183,6 +183,18 @@ export const PartnersSection: React.FC<PartnersSectionProps> = ({
                         >
                           <Linkedin className="w-3.5 h-3.5" />
                         </a>
+                        {partner.instagram && (
+                          <a
+                            href={partner.instagram}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="p-2 rounded border border-[#2A344A] bg-[#111827] text-slate-300 hover:text-[#E1306C] hover:border-[#E1306C]/50 transition-colors"
+                            title={`Instagram Oficial de ${partner.name}`}
+                            aria-label={`Instagram Oficial de ${partner.name}`}
+                          >
+                            <Instagram className="w-3.5 h-3.5" />
+                          </a>
+                        )}
                         <a
                           href={partner.whatsapp}
                           target="_blank"
