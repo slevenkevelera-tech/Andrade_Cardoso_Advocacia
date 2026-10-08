@@ -24,6 +24,7 @@ export const PARTNERS_DATA: Partner[] = [
     image: PARTNER_PHOTOS.maurilo,
     email: 'maurilo@andradecardoso.adv.br',
     linkedin: 'https://linkedin.com/in/maurilo-cardoso',
+    instagram: 'https://www.instagram.com/mauriloac/',
     whatsapp: 'https://w.app/lorenzo_cardoso_software_engineer',
   },
   {
@@ -225,7 +226,7 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
     comments: 134,
     timestamp: 'Há 1 dia',
     tag: '#MauriloCardoso',
-    postUrl: 'https://instagram.com/andradecardosoadv',
+    postUrl: 'https://www.instagram.com/mauriloac/',
   },
   {
     id: 'ig-3',
