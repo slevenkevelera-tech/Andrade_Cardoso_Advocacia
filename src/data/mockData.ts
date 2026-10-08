@@ -37,7 +37,7 @@ export const PARTNERS_DATA: Partner[] = [
       'Engenheiro de Software & Especialista em Automação de Processos',
       'Arquiteto de Sistemas de Jurimetria e Extração de Precedentes (Codex API)',
       'Certificado em Governança de Inteligência Artificial e LGPD Empresarial',
-      'Responsável pela infraestrutura digital autônoma do Andrade Cardoso',
+      'Responsável pela infraestrutura digital autônoma do Escritório Andrade Cardoso Advocacia',
     ],
     specialties: [
       'Legal Operations & Automação de Workflows Jurídicos',
