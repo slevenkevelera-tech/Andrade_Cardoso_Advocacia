@@ -75,6 +75,7 @@ export const PARTNERS_DATA: Partner[] = [
     image: PARTNER_PHOTOS.luana,
     email: 'luana@andradecardoso.adv.br',
     linkedin: 'https://linkedin.com/in/luana-andrade-adv',
+    instagram: 'https://www.instagram.com/monteirorodriguesluana/',
     whatsapp: 'https://w.app/lorenzo_cardoso_software_engineer',
   },
 ];
@@ -233,12 +234,12 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
   {
     id: 'ig-3',
     imageUrl: PARTNER_PHOTOS.luana,
-    caption: '👩‍⚖️ Luana Monteiro · Direito Civil, Empresarial e estruturação jurídica estratégica.',
+    caption: '👩‍⚖️ Luana Monteiro · Direito do Trabalho e estratégia jurídica.',
     likes: 3105,
     comments: 242,
     timestamp: 'Há 3 dias',
     tag: '#LuanaMonteiro',
-    postUrl: 'https://instagram.com/andradecardosoadv',
+    postUrl: 'https://www.instagram.com/monteirorodriguesluana/',
   },
 ];
 
