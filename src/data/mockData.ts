@@ -10,9 +10,9 @@ export const PARTNERS_DATA: Partner[] = [
     bio: 'Advogado sênior com mais de 10 anos de atuação combativa em litígios de alta complexidade, estratégia contenciosa perante Tribunais e governança institucional. Como Delegado da OAB na Subseção de Cametá, lidera prerrogativas da advocacia e defesa do Estado Democrático de Direito na região norte.',
     credentials: [
       'Delegado OAB/Cametá (Subseção OAB/PA)',
-      'Especialista em Direito Processual Civil & Constitucional',
+      'Especialista em Direito Processual Civil & Constitucional, Criminal e Previdenciário',
       'Membro da Comissão de Prerrogativas e Honorários da OAB',
-      'Mais de 1.800 sustentações orais e recursos estratégicos nos Tribunais',
+      'Mais de 1.000 sustentações orais e recursos estratégicos nos Tribunais',
     ],
     specialties: [
       'Contencioso Estratégico & Tribunais Superiores',
