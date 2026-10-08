@@ -15,9 +15,12 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Image with Measured Contrast Scrim */}
       <div className="absolute inset-0 z-0">
         <img
-          src="/images/hero-advocacia-luxury.jpg"
+          src="https://images.unsplash.com/photo-1767277680055-34f1eeec0c26?auto=format&fit=crop&fm=jpg&q=92&w=3840"
           alt=""
           aria-hidden="true"
+          fetchPriority="high"
+          decoding="async"
+          sizes="100vw"
           className="h-full w-full object-cover object-center opacity-100 transition-transform duration-1000 ease-out"
         />
       </div>
