@@ -15,17 +15,19 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
       {/* Background Image with Measured Contrast Scrim */}
       <div className="absolute inset-0 z-0">
         <img
-          src="https://images.unsplash.com/photo-1767277680055-34f1eeec0c26?auto=format&fit=crop&fm=jpg&q=92&w=3840"
+          src="https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&fm=jpg&q=88&w=2560"
           alt=""
           aria-hidden="true"
           fetchPriority="high"
           decoding="async"
           sizes="100vw"
-          className="h-full w-full object-cover object-center opacity-100 transition-transform duration-1000 ease-out"
+          className="h-full w-full object-cover object-center opacity-75 transition-transform duration-1000 ease-out"
         />
+        <div className="absolute inset-0 bg-gradient-to-b from-[#080B11]/55 via-[#080B11]/65 to-[#080B11]/95" aria-hidden="true" />
       </div>
 
       <div className="relative z-10 mx-auto max-w-6xl px-6 py-24 sm:py-32 text-center lg:px-8">
+        <div className="rounded-2xl border border-[#C5A880]/30 bg-[#080B11]/65 px-5 py-8 shadow-2xl shadow-black/30 backdrop-blur-md sm:px-10 sm:py-12">
         {/* Zero-Pill Unboxed Trust Metadata */}
         <div className="mb-6 flex flex-wrap items-center justify-center gap-2 text-xs uppercase tracking-[0.25em] text-[#C5A880]">
           <span>Subseção OAB Cametá / PA</span>
@@ -115,6 +117,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({
               Automação contínua em follow-up e conciergerie
             </p>
           </div>
+        </div>
         </div>
       </div>
     </section>
