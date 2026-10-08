@@ -218,7 +218,7 @@ export const INSTAGRAM_POSTS_DATA: InstagramPost[] = [
     comments: 87,
     timestamp: 'Há 2 horas',
     tag: '#LorenzoCardoso',
-    postUrl: 'https://instagram.com/andradecardosoadv',
+    postUrl: 'https://www.instagram.com/lorenzolopescardoso/',
   },
   {
     id: 'ig-2',
