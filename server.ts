@@ -6,6 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
+import { requestOmniRoute } from './src/server/ai/omniroute';
 
 // Load environment variables securely from .env.local first, then .env
 dotenv.config({ path: '.env.local' });
@@ -110,6 +111,20 @@ app.post('/api/chat', rateLimiter(20, 60 * 1000), async (req: Request, res: Resp
       .slice(-12) : [];
 
     if (!message) return res.status(400).json({ error: 'Mensagem inválida ou ausente.' });
+
+    // OmniRoute is opt-in and server-side only. Gemini remains the default provider.
+    if (process.env.AI_PROVIDER === 'omniroute') {
+      const result = await requestOmniRoute(
+        message,
+        history.map((item: any) => ({
+          role: item.role === 'model' ? 'assistant' as const : 'user' as const,
+          content: item.text,
+        })),
+      );
+      // Keep the existing public response contract for the current frontend.
+      res.setHeader('X-AI-Specialist', result.specialist);
+      return res.json({ reply: result.reply });
+    }
 
     const contents = [...history.map((item: any) => ({ role: item.role, parts: [{ text: item.text }] })), { role: 'user', parts: [{ text: message }] }];
 
